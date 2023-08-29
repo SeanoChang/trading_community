@@ -43,7 +43,10 @@ const Navbar = (props: {
             </motion.button>
           </li>
           <li className="px-4">
-            <Link href="/protected">Community</Link>
+            <Link href="/protected">Home</Link>
+          </li>
+          <li className="px-4">
+            <Link href="/protected/community">Community</Link>
           </li>
           <li className="px-4">
             <Link href="/protected/channels">Channels</Link>

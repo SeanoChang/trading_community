@@ -63,8 +63,7 @@ export const channelsRouter = createTRPCRouter({
         z.object({
             name: z.string(),
             slug: z.string(),
-            userId: z.string().optional(),
-            postId: z.string().optional(),
+            userId: z.string(),
         })
     )
     .mutation(async ({ input, ctx }) => {
@@ -72,9 +71,8 @@ export const channelsRouter = createTRPCRouter({
             data: {
                 name: input.name,
                 slug: input.slug,
-                users: { connect: { id: input.userId } },
-            }
+                userId: input.userId,
+            },
         });
     }),
-
 });

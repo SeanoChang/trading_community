@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { api } from "~/utils/api";
+import Image from "next/image";
 
 const FollowingsPage = (): JSX.Element => {
     const router = useRouter();
@@ -29,9 +30,9 @@ const FollowingsPage = (): JSX.Element => {
                 <div className="flex flex-col justify-start items-center min-h-screen bg-gray-950">
                     <h1 className="text-5xl text-gray-50">Following</h1>
                     {
-                        following?.map((follower) => (
-                            <motion.div className="flex flex-row items-center justify-center">
-                                <img
+                        following?.map((follower, i: number) => (
+                            <motion.div className="flex flex-row items-center justify-center" key={i}>
+                                <Image
                                     src={
                                         follower?.followingImage
                                             ? follower?.followingImage

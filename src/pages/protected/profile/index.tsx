@@ -10,12 +10,13 @@ import TradingPairs from "~/components/protected/profile/TradingPairs";
 import MonthlyGoals from "~/components/protected/profile/MontlyGoals";
 import WeeklyGoals from "~/components/protected/profile/WeeklyGoals";
 import { type NextApiRequest, type NextApiResponse } from "next";
-import { type Session } from "~/utils/session"
+import { type Session } from "~/utils/session";
+import Image from "next/image";
 
-const ProfilePage = (props: {email: string, image: string}): JSX.Element => {
+const ProfilePage = (props: { email: string; image: string }): JSX.Element => {
   // get current user
   const user = api.user.getCurrentUser.useQuery({
-    email:  props.email as string,
+    email: props.email,
   });
 
   // get all followers
@@ -37,13 +38,15 @@ const ProfilePage = (props: {email: string, image: string}): JSX.Element => {
       <Head>
         <title>Profile</title>
       </Head>
-      <main>
+      <main className="flex flex-col items-center justify-center bg-gray-950">
         <ProfileNavbar />
-        <div className="flex min-h-screen flex-col items-center justify-center bg-gray-950">
-          <h1 className="text-5xl text-gray-50">Profile</h1>
+        <div className="flex min-h-screen w-[90vw] flex-col justify-center md:w-[50vw]">
+          <h1 className="text-left text-5xl font-semibold text-gray-50">
+            # Profile
+          </h1>
           <div className="flex flex-row items-center justify-center">
             <motion.div className="flex flex-row items-center justify-center">
-              <img
+              <Image
                 src={
                   props.image
                     ? props.image
@@ -65,7 +68,7 @@ const ProfilePage = (props: {email: string, image: string}): JSX.Element => {
               </div>
             </motion.div>
             <motion.div>
-              <h2 className="text-gray-50">Price List...</h2>
+              <h2 className="text-gray-50">Price List</h2>
             </motion.div>
           </div>
           <div className="flex flex-col md:flex-row">
@@ -85,26 +88,35 @@ const ProfilePage = (props: {email: string, image: string}): JSX.Element => {
 
 export default ProfilePage;
 
-export async function getServerSideProps(context: {req: NextApiRequest, res: NextApiResponse}) {
-  const session: Session = await getServerSession(context.req, context.res, authOptions).then((res) => {
-    return JSON.parse(JSON.stringify(res))
-  }).catch((err) => {
-    console.error(err)
-  })
+export async function getServerSideProps(context: {
+  req: NextApiRequest;
+  res: NextApiResponse;
+}) {
+  const session: Session | void = await getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  )
+    .then((res) => {
+      return JSON.parse(JSON.stringify(res)) as Session;
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 
   if (!session) {
     return {
       redirect: {
-        destination: '/',
+        destination: "/",
         permanent: false,
       },
-    }
+    };
   }
 
   return {
     props: {
-      email: session.user.email as string,
-      image: session.user.image as string,
+      email: session.user.email,
+      image: session.user.image,
     },
-  }
+  };
 }

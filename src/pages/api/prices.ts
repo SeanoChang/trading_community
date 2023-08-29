@@ -2,6 +2,12 @@ import Cors from "cors";
 import type { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
 
+type CorsFunction = (req: Cors.CorsRequest, res: {
+  statusCode?: number | undefined;
+  setHeader(key: string, value: string): any;
+  end(): any;
+}, next: (err?: any) => any) => void
+
 // Initializing the cors middleware
 const cors = Cors({
   methods: ["GET", "HEAD"],
@@ -12,7 +18,7 @@ const cors = Cors({
 function runMiddleware(
   req: NextApiRequest,
   res: NextApiResponse,
-  fn: Function
+  fn: CorsFunction
 ) {
   return new Promise((resolve, reject) => {
     fn(req, res, (result: any) => {

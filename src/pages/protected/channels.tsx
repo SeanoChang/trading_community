@@ -36,7 +36,7 @@ const ChannelsPage = (props: { name: string; email: string }): JSX.Element => {
             ></motion.div>
             <motion.div className="max-w-screen top-[100vh-64px] z-0 flex min-h-screen flex-col items-center justify-center text-white">
               <h1 className="text-center text-6xl font-semibold text-white">
-                Welcome to the Trading Community {props.name}
+                Sorry {props.name}, this page is currently under construction
               </h1>
             </motion.div>
             <motion.div

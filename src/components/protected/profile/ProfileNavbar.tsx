@@ -29,7 +29,10 @@ const ProfileNavbar = (): JSX.Element => {
         <motion.div className="mx-auto flex flex-wrap items-center justify-between p-4">
           <ul className="hidden flex-row items-center justify-between text-gray-50 sm:flex">
             <li className="px-4">
-              <Link href="/protected">Community</Link>
+              <Link href="/protected">Home</Link>
+            </li>
+            <li className="px-4">
+              <Link href="/protected/community">Community</Link>
             </li>
             <li className="px-4">
               <Link href="/protected/channels">Channels</Link>

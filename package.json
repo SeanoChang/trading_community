@@ -22,6 +22,7 @@
     "@trpc/server": "^10.18.0",
     "@vitejs/plugin-react": "^4.0.2",
     "axios": "^1.4.0",
+    "cheerio": "^1.0.0-rc.12",
     "cloudinary": "^1.37.3",
     "cors": "^2.8.5",
     "esbuild": "^0.18.11",
